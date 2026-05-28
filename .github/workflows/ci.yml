@@ -40,7 +40,7 @@ jobs:
           coverage: none
 
       - name: Instalar Dependencias de Composer
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
 
       - name: Preparar archivo .env
         run: cp .env.example .env
