@@ -14,6 +14,15 @@ jobs:
     name: Build and Run Tests
     runs-on: ubuntu-latest
 
+   
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: bovweight_test
+      DB_USERNAME: root
+      DB_PASSWORD: root
+
     services:
       mysql:
         image: mysql:8.0
@@ -47,15 +56,6 @@ jobs:
 
       - name: Generar Application Key
         run: php artisan key:generate
-
-      - name: Configurar base de datos MySQL
-        run: |
-          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=mysql/' .env
-          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' .env
-          sed -i 's/DB_PORT=.*/DB_PORT=3306/' .env
-          sed -i 's/DB_DATABASE=.*/DB_DATABASE=bovweight_test/' .env
-          sed -i 's/DB_USERNAME=.*/DB_USERNAME=root/' .env
-          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=root/' .env
 
       - name: Ejecutar Migraciones
         run: php artisan migrate --force
